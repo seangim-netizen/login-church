@@ -1,5 +1,91 @@
 {
   "cleanUrls": true,
+  "routes": [
+    {
+      "src": "/siwoong",
+      "dest": "/siwoong.html"
+    },
+    {
+      "src": "/sungjoo",
+      "dest": "/sungjoo.html"
+    },
+    {
+      "src": "/taewoong",
+      "dest": "/taewoong.html"
+    },
+    {
+      "src": "/sunghwan",
+      "dest": "/sunghwan.html"
+    },
+    {
+      "src": "/hyunkyung",
+      "dest": "/hyunkyung.html"
+    },
+    {
+      "src": "/guihyun",
+      "dest": "/guihyun.html"
+    },
+    {
+      "src": "/eunwoo",
+      "dest": "/eunwoo.html"
+    },
+    {
+      "src": "/sohee",
+      "dest": "/sohee.html"
+    },
+    {
+      "src": "/seonga",
+      "dest": "/seonga.html"
+    },
+    {
+      "src": "/eunjung",
+      "dest": "/eunjung.html"
+    },
+    {
+      "src": "/jihyun",
+      "dest": "/jihyun.html"
+    },
+    {
+      "src": "/jungho",
+      "dest": "/jungho.html"
+    },
+    {
+      "src": "/junghoon",
+      "dest": "/junghoon.html"
+    },
+    {
+      "src": "/jungmi",
+      "dest": "/jungmi.html"
+    },
+    {
+      "src": "/kyungmyun",
+      "dest": "/kyungmyun.html"
+    },
+    {
+      "src": "/minyoung",
+      "dest": "/minyoung.html"
+    },
+    {
+      "src": "/yangsik",
+      "dest": "/yangsik.html"
+    },
+    {
+      "src": "/yonghee",
+      "dest": "/yonghee.html"
+    },
+    {
+      "src": "/yoonsook",
+      "dest": "/yoonsook.html"
+    },
+    {
+      "src": "/yosep",
+      "dest": "/yosep.html"
+    },
+    {
+      "src": "/LoginChurch",
+      "dest": "/LoginChurch.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -9,15 +95,11 @@
           "value": "no-cache, no-store, must-revalidate"
         },
         {
-          "key": "Pragma",
-          "value": "no-cache"
-        },
-        {
-          "key": "Expires",
-          "value": "0"
+          "key": "CDN-Cache-Control",
+          "value": "no-store"
         }
       ]
     }
   ],
-  "buildTimestamp": "1786785999"
+  "triggerBuildTime": "1786798611"
 }
