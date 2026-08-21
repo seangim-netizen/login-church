@@ -1219,7 +1219,20 @@
           });
 
           navigator.mediaSession.setActionHandler('play', function() {
-            if (!isTTSSpeaking) startTTSAudio();
+            var bgAudio = document.getElementById('bgSilentAudio');
+            if (bgAudio) {
+              try { bgAudio.play().catch(function(e){}); } catch(e) {}
+            }
+            if ('speechSynthesis' in window) {
+              if (window.speechSynthesis.paused) {
+                try { window.speechSynthesis.resume(); } catch(e) {}
+                isTTSSpeaking = true;
+                isTTSPaused = false;
+                updatePlayerControlsUI();
+              } else if (!isTTSSpeaking) {
+                startTTSAudio();
+              }
+            }
           });
           navigator.mediaSession.setActionHandler('pause', function() {
             stopTTSAudio(false);
