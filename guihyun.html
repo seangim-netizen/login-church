@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" href="app_logo.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="김귀현 권사">
+  <meta name="apple-mobile-web-app-title" content="김시웅 권사">
   <title>📖 김귀현 권사 성경통독일기장</title>
   <style>
     :root {
@@ -737,10 +737,10 @@
 
   <script>
   window.addEventListener('DOMContentLoaded', function() {
-    var PERMANENT_STORAGE_KEY = 'loginchurch_permanent_tongdok_data_' + 'guihyun';
-    var PERMANENT_THEME_KEY = 'loginchurch_permanent_theme_' + 'guihyun';
-    var PERMANENT_VER_KEY = 'loginchurch_permanent_bible_ver_' + 'guihyun';
-    var PERMANENT_FONT_KEY = 'loginchurch_permanent_font_size_' + 'guihyun';
+    var PERMANENT_STORAGE_KEY = 'loginchurch_permanent_tongdok_data_' + 'siwoong';
+    var PERMANENT_THEME_KEY = 'loginchurch_permanent_theme_' + 'siwoong';
+    var PERMANENT_VER_KEY = 'loginchurch_permanent_bible_ver_' + 'siwoong';
+    var PERMANENT_FONT_KEY = 'loginchurch_permanent_font_size_' + 'siwoong';
 
     var currentBibleVersion = localStorage.getItem(PERMANENT_VER_KEY) || 'SB';
     var currentFontSize = 0.9;
@@ -1231,7 +1231,7 @@
           var infoText = itemObj.speakText || '성경 통독';
           navigator.mediaSession.metadata = new MediaMetadata({
             title: infoText.length > 35 ? infoText.substring(0, 35) + '...' : infoText,
-            artist: '김귀현 권사 성경통독일기장',
+            artist: '김시웅 권사 성경통독일기장',
             album: '📖 성경 통독 낭독 중',
             artwork: [
               { src: 'app_logo.png', sizes: '512x512', type: 'image/png' },
