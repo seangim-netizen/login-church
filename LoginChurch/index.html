@@ -1135,6 +1135,17 @@
         return;
       }
 
+      // iOS/Safari lock screen suspend recovery: if paused, forcefully resume immediately
+      if ('speechSynthesis' in window && window.speechSynthesis.paused) {
+        try {
+          window.speechSynthesis.resume();
+          isTTSSpeaking = true;
+          isTTSPaused = false;
+          updatePlayerControlsUI();
+          return;
+        } catch(e) {}
+      }
+
       if (isTTSSpeaking) {
         stopTTSAudio(false);
         showToast('낭독을 일시정지했습니다.');
