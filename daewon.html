@@ -984,7 +984,9 @@
       if ('speechSynthesis' in window) {
         try {
           window.speechSynthesis.pause();
-          safeCancelSpeech();
+          if (isFullReset) {
+            safeCancelSpeech();
+          }
         } catch(e) {}
       }
 
@@ -1994,6 +1996,29 @@
         });
       }
     })();
+
+    // Sync UI and variables immediately when returning from background/screen off
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') {
+        if ('speechSynthesis' in window) {
+          if (window.speechSynthesis.speaking) {
+            if (window.speechSynthesis.paused) {
+              isTTSSpeaking = false;
+              isTTSPaused = true;
+            } else {
+              isTTSSpeaking = true;
+              isTTSPaused = false;
+            }
+          } else {
+            if (!isTTSPaused) {
+              isTTSSpeaking = false;
+              isTTSPaused = false;
+            }
+          }
+        }
+        updatePlayerControlsUI();
+      }
+    });
 
   
     // ISOLATED TAB 2 COPY ENGINE (100% DECOUPLED FROM BIBLE READER)
