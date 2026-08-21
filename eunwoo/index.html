@@ -1016,6 +1016,7 @@
         document.querySelectorAll('.selected-cursor-verse').forEach(function(el) {
           el.classList.remove('selected-cursor-verse');
         });
+        window.selectedCursorVerseKey = targetEl.getAttribute('data-vkey');
         targetEl.classList.add('selected-cursor-verse');
 
         var vNum = targetEl.getAttribute('data-vnum');
@@ -1689,6 +1690,33 @@
       if (l) l.value = jData.lesson || '';
 
       updateCompleteButtonUI();
+      
+      // Restore highlight and index on version switch
+      ttsSpeechItems = [];
+      var allReaderElements = document.querySelectorAll('#bibleTextContainer .bible-chapter-header, #bibleTextContainer .bible-verse-card');
+      allReaderElements.forEach(function(el) {
+        if (el.classList.contains('bible-chapter-header')) {
+          var chText = el.innerText.replace('📖 ', '').trim();
+          ttsSpeechItems.push({ element: el, speakText: chText });
+        } else if (el.classList.contains('bible-verse-card')) {
+          var vPureText = el.getAttribute('data-puretext') || el.innerText;
+          ttsSpeechItems.push({ element: el, speakText: vPureText });
+        }
+      });
+      if (window.selectedCursorVerseKey) {
+        var foundEl = document.querySelector('[data-vkey="' + window.selectedCursorVerseKey + '"]');
+        if (foundEl) {
+          foundEl.classList.add('selected-cursor-verse');
+          foundEl.classList.add('is-reading-speaking');
+          for (var i = 0; i < ttsSpeechItems.length; i++) {
+            if (ttsSpeechItems[i].element === foundEl) {
+              selectedCursorVerseIndex = i;
+              currentTTSIndex = i;
+              break;
+            }
+          }
+        }
+      }
     }
 
     function renderSchedule() {
