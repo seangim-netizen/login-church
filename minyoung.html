@@ -523,36 +523,56 @@
 
 <script>
 (function() {
-    var paths = [
-        'bible_db_66.js',
-        './bible_db_66.js',
-        '../bible_db_66.js',
-        '/login-church/bible_db_66.js',
-        '/bible_db_66.js',
-        'https://seangim-netizen.github.io/login-church/bible_db_66.js',
-        'https://loginchurch.vercel.app/bible_db_66.js'
-    ];
-    var idx = 0;
-    function loadNext() {
-        if (window.BIBLE_66_DB_KG && window.BIBLE_66_DB_SB && window.BIBLE_66_DB_KH) {
-            if (typeof window.renderBiblePassage === 'function') window.renderBiblePassage();
+    var dbFiles = ['bible_db_66.js', 'bible_db_sb.js'];
+    var loadQueue = [];
+    
+    dbFiles.forEach(function(fileName) {
+        loadQueue.push([
+            fileName,
+            './' + fileName,
+            '../' + fileName,
+            '/login-church/' + fileName,
+            '/' + fileName,
+            'https://seangim-netizen.github.io/login-church/' + fileName,
+            'https://loginchurch.vercel.app/' + fileName
+        ]);
+    });
+    
+    var queueIdx = 0;
+    
+    function loadFile(filePaths, pathIdx, onDone) {
+        if (pathIdx >= filePaths.length) {
+            onDone();
             return;
         }
-        if (idx >= paths.length) return;
         var s = document.createElement('script');
-        s.src = paths[idx++];
+        s.src = filePaths[pathIdx];
         s.onload = function() {
+            onDone();
+        };
+        s.onerror = function() {
+            loadFile(filePaths, pathIdx + 1, onDone);
+        };
+        document.head.appendChild(s);
+    }
+    
+    function loadNextQueue() {
+        if (queueIdx >= loadQueue.length) {
             var mDB = window.BIBLE_66_DB_KG || window.BIBLE_FULL_DB_KG || window.BIBLE_FULL_DB || {};
             if (!window.BIBLE_66_DB_SB || Object.keys(window.BIBLE_66_DB_SB).length === 0) window.BIBLE_66_DB_SB = mDB;
             if (!window.BIBLE_66_DB_KH || Object.keys(window.BIBLE_66_DB_KH).length === 0) window.BIBLE_66_DB_KH = mDB;
             if (!window.BIBLE_66_DB_KG || Object.keys(window.BIBLE_66_DB_KG).length === 0) window.BIBLE_66_DB_KG = mDB;
             
             if (typeof window.renderBiblePassage === 'function') window.renderBiblePassage();
-        };
-        s.onerror = loadNext;
-        document.head.appendChild(s);
+            return;
+        }
+        loadFile(loadQueue[queueIdx], 0, function() {
+            queueIdx++;
+            loadNextQueue();
+        });
     }
-    loadNext();
+    
+    loadNextQueue();
 })();
 </script>
 </head>
