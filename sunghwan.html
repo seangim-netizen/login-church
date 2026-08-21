@@ -1964,6 +1964,11 @@
             }
           }
         });
+        bgSilentAudioEl.addEventListener('pause', function() {
+          if (isTTSSpeaking && !isTTSPaused) {
+            stopTTSAudio(false);
+          }
+        });
       }
     })();
 
