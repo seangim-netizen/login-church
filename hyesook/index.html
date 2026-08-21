@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" href="app_logo.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="김시웅 권사">
+  <meta name="apple-mobile-web-app-title" content="통독클럽">
   <title>📖 김혜숙 집사 성경통독일기장</title>
   <style>
     :root {
@@ -1285,8 +1285,7 @@
     }
 
     function switchBibleVersion() {
-      safeCancelSpeech();
-      isTTSSpeaking = false;
+      stopTTSAudio(true);
 
       if (currentBibleVersion === 'KG') currentBibleVersion = 'KH';
       else if (currentBibleVersion === 'KH') currentBibleVersion = 'SB';
